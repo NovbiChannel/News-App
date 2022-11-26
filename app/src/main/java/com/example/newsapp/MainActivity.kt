@@ -7,7 +7,14 @@ import android.os.Looper
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
@@ -15,14 +22,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
-        Handler(Looper.myLooper()!!).postDelayed({
+        setContentView(R.layout.fragment_splash)
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(5000)
+            _binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(mBinding.root)
             mBinding.bottomNavMenu.setupWithNavController(
                 navController = mBinding.navHostFragment.findNavController()
             )
-        }, 5000)
+        }
     }
 
     override fun onDestroy() {
