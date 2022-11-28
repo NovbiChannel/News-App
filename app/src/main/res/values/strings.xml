@@ -2,4 +2,6 @@
     <string name="app_name">NewsApp</string>
     <string name="popular_news">Popular News</string>
     <string name="image_view">Image view</string>
+    <string name="search">Search</string>
+    <string name="hint_search">Musk invited</string>
 </resources>
